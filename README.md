@@ -35,9 +35,11 @@ public class Demo : MonoBehaviour
     private void Play(float time) { }
 }
 ```
+
 - 挂载到GameObject后使用工具
 - 自动挂载一个解析脚本ReflectionMonoBehaviour
 - 在解析脚本中调试组件
+
 ![](https://i.imgur.com/u48LGS9.png)
 
 # 安装
