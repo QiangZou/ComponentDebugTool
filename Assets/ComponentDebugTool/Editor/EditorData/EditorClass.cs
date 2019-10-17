@@ -63,7 +63,7 @@ namespace Zq.Tool
             }
         }
 
-        public static void GUI(EditorClass info)
+        public static void GUI(EditorClass info, AccessModifier accessModifier = AccessModifier.All)
         {
             EditorGUI.indentLevel = info.level;
 
@@ -74,7 +74,7 @@ namespace Zq.Tool
                 {
                     EditorField editorField = info.editorFields[i];
 
-                    EditorField.GUI(editorField);
+                    EditorField.GUI(editorField, accessModifier);
                 }
 
                 for (int i = 0; i < info.editorMethods.Count; i++)
