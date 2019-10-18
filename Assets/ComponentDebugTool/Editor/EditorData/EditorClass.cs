@@ -63,25 +63,31 @@ namespace Zq.Tool
             }
         }
 
-        public static void GUI(EditorClass info, AccessModifier accessModifier = AccessModifier.All)
+        public static void GUI(EditorClass info, MemberFilter memberFilter = MemberFilter.All, AccessModifier accessModifier = AccessModifier.All, string searchKeyword = "")
         {
             EditorGUI.indentLevel = info.level;
 
             info.isFold = EditorGUILayout.Foldout(info.isFold, info.name);
             if (info.isFold)
             {
-                for (int i = 0; i < info.editorFields.Count; i++)
+                if (memberFilter == MemberFilter.All || memberFilter == MemberFilter.Fields)
                 {
-                    EditorField editorField = info.editorFields[i];
+                    for (int i = 0; i < info.editorFields.Count; i++)
+                    {
+                        EditorField editorField = info.editorFields[i];
 
-                    EditorField.GUI(editorField, accessModifier);
+                        EditorField.GUI(editorField, accessModifier, searchKeyword);
+                    }
                 }
 
-                for (int i = 0; i < info.editorMethods.Count; i++)
+                if (memberFilter == MemberFilter.All || memberFilter == MemberFilter.Methods)
                 {
-                    EditorMethod editorMethod = info.editorMethods[i];
+                    for (int i = 0; i < info.editorMethods.Count; i++)
+                    {
+                        EditorMethod editorMethod = info.editorMethods[i];
 
-                    EditorMethod.GUI(editorMethod);
+                        EditorMethod.GUI(editorMethod, accessModifier, searchKeyword);
+                    }
                 }
             }
         }

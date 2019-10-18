@@ -10,6 +10,7 @@ namespace Zq.Tool
         public object instance;
         public MethodInfo methodInfo;
         public string name = string.Empty;
+        public AccessModifier accessModifier = AccessModifier.None;
         public List<ParameterData> parameters = new List<ParameterData>();
 
         public MethodData(object instance, MethodInfo methodInfo)
@@ -17,6 +18,15 @@ namespace Zq.Tool
             this.instance = instance;
             this.methodInfo = methodInfo;
             name = methodInfo.Name;
+
+            if (this.methodInfo.IsPublic)
+            {
+                accessModifier = AccessModifier.Public;
+            }
+            else if (this.methodInfo.IsPrivate)
+            {
+                accessModifier = AccessModifier.Private;
+            }
 
             ParameterInfo[] parameters = methodInfo.GetParameters();
             foreach (var item in parameters)

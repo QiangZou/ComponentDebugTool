@@ -13,7 +13,10 @@ namespace Zq.Tool
 
         EditorClass info;
 
+        MemberFilter memberFilter = MemberFilter.All;
         AccessModifier accessModifier = AccessModifier.All;
+
+        string searchKeyword = string.Empty;
 
         void OnEnable()
         {
@@ -51,11 +54,20 @@ namespace Zq.Tool
                 return;
             }
 
-            accessModifier = (AccessModifier)EditorGUILayout.EnumPopup("访问修饰符", accessModifier);
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
 
-            EditorClass.GUI(info, accessModifier);
+            memberFilter = (MemberFilter)EditorGUILayout.EnumPopup("成员过滤", memberFilter);
+
+            accessModifier = (AccessModifier)EditorGUILayout.EnumPopup("修饰符过滤", accessModifier);
+
+            searchKeyword = EditorGUILayout.TextField("搜索过滤", searchKeyword);
+
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
+            EditorClass.GUI(info, memberFilter, accessModifier, searchKeyword.ToLower());
         }
-
     }
 }
 

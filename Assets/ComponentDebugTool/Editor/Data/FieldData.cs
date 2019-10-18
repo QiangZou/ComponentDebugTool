@@ -47,8 +47,4 @@ namespace Zq.Tool
             fieldInfo.SetValue(instance, obj);
         }
     }
-
-
-
 }
-

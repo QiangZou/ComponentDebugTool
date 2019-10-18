@@ -31,8 +31,18 @@ namespace Zq.Tool
             }
         }
 
-        public static void GUI(EditorMethod editorMethod)
+        public static void GUI(EditorMethod editorMethod, AccessModifier accessModifier = AccessModifier.All, string searchKeyword = "")
         {
+            if (accessModifier != AccessModifier.All && editorMethod.methodData.accessModifier != accessModifier)
+            {
+                return;
+            }
+
+            if (searchKeyword != string.Empty && editorMethod.methodData.name.ToLower().Contains(searchKeyword) == false)
+            {
+                return;
+            }
+
             for (int i = 0; i < editorMethod.editorParameters.Count; i++)
             {
                 EditorParameter editorParameter = editorMethod.editorParameters[i];
