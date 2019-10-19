@@ -1,51 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
-using System;
+using UnityEngine;
 
 namespace Zq.Tool
 {
-    [CustomEditor(typeof(ReflectionMonoBehaviour))]
-    public class ReflectionMonoBehaviourEditor : Editor
+    public class ConponentDebugWindow : EditorWindow
     {
-        ReflectionMonoBehaviour instance;
-
+        public object instance;
         EditorInstance editorInstance;
 
-        void OnEnable()
+        Vector2 scrollPosition = Vector2.zero;
+        public ConponentDebugWindow()
         {
-            Refresh();
+            minSize = new Vector2(400,600);
+            titleContent = new GUIContent("组件调试窗口");
         }
 
-        void Refresh()
+        void OnGUI()
         {
-            if (target == null)
-            {
-                return;
-            }
-
-            if (instance == null)
-            {
-                instance = target as ReflectionMonoBehaviour;
-            }
+            EditorGUILayout.ObjectField(instance as UnityEngine.Object, instance.GetType(), true);
 
             if (editorInstance == null)
             {
-                editorInstance = new EditorInstance(instance.target);
+                editorInstance = new EditorInstance(instance);
             }
-        }
 
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-
-            Refresh();
-
-            if (editorInstance == null)
-            {
-                return;
-            }
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -62,7 +43,8 @@ namespace Zq.Tool
             EditorGUILayout.Space();
 
             EditorClass.GUI(editorInstance.info, editorInstance.memberFilter, editorInstance.accessModifier, editorInstance.instanceType, editorInstance.searchKeyword.ToLower());
+            
+            EditorGUILayout.EndScrollView();
         }
     }
 }
-

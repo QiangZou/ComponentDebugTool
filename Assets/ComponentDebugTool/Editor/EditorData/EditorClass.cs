@@ -8,7 +8,7 @@ namespace Zq.Tool
     {
         public ClassData classInfo;
 
-        public int level = 0;
+        public int level = -1;
         public bool isFold = true;
         public string name = string.Empty;
         public List<EditorField> editorFields = new List<EditorField>();
@@ -63,11 +63,15 @@ namespace Zq.Tool
             }
         }
 
-        public static void GUI(EditorClass info, MemberFilter memberFilter = MemberFilter.All, AccessModifier accessModifier = AccessModifier.All, string searchKeyword = "")
+        public static void GUI(EditorClass info, MemberFilter memberFilter = MemberFilter.All, AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance, string searchKeyword = "")
         {
             EditorGUI.indentLevel = info.level;
 
-            info.isFold = EditorGUILayout.Foldout(info.isFold, info.name);
+            if (info.level != -1)
+            {
+                info.isFold = EditorGUILayout.Foldout(info.isFold, info.name);
+            }
+
             if (info.isFold)
             {
                 if (memberFilter == MemberFilter.All || memberFilter == MemberFilter.Fields)
@@ -76,7 +80,7 @@ namespace Zq.Tool
                     {
                         EditorField editorField = info.editorFields[i];
 
-                        EditorField.GUI(editorField, accessModifier, searchKeyword);
+                        EditorField.GUI(editorField, accessModifier, instanceType, searchKeyword);
                     }
                 }
 
@@ -86,7 +90,7 @@ namespace Zq.Tool
                     {
                         EditorMethod editorMethod = info.editorMethods[i];
 
-                        EditorMethod.GUI(editorMethod, accessModifier, searchKeyword);
+                        EditorMethod.GUI(editorMethod, accessModifier, instanceType, searchKeyword);
                     }
                 }
             }

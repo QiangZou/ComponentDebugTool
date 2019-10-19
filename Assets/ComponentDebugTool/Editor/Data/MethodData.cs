@@ -11,6 +11,7 @@ namespace Zq.Tool
         public MethodInfo methodInfo;
         public string name = string.Empty;
         public AccessModifier accessModifier = AccessModifier.None;
+        public InstanceType instanceType = InstanceType.None;
         public List<ParameterData> parameters = new List<ParameterData>();
 
         public MethodData(object instance, MethodInfo methodInfo)
@@ -26,6 +27,15 @@ namespace Zq.Tool
             else if (this.methodInfo.IsPrivate)
             {
                 accessModifier = AccessModifier.Private;
+            }
+
+            if (this.methodInfo.IsStatic)
+            {
+                instanceType = InstanceType.Static;
+            }
+            else
+            {
+                instanceType = InstanceType.Instance;
             }
 
             ParameterInfo[] parameters = methodInfo.GetParameters();

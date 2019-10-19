@@ -6,7 +6,7 @@ public class Data { }
 
 public class Demo : MonoBehaviour
 {
-    private float speed;
+    private readonly float speed;
 
     private Data data;
 

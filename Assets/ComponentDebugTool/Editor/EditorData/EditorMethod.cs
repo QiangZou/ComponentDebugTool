@@ -31,9 +31,14 @@ namespace Zq.Tool
             }
         }
 
-        public static void GUI(EditorMethod editorMethod, AccessModifier accessModifier = AccessModifier.All, string searchKeyword = "")
+        public static void GUI(EditorMethod editorMethod, AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance, string searchKeyword = "")
         {
             if (accessModifier != AccessModifier.All && editorMethod.methodData.accessModifier != accessModifier)
+            {
+                return;
+            }
+
+            if (instanceType != InstanceType.All && editorMethod.methodData.instanceType != instanceType)
             {
                 return;
             }

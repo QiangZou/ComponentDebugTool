@@ -13,6 +13,7 @@ namespace Zq.Tool
         public int level;
         public ObjectData objectinfo;
         public AccessModifier accessModifier = AccessModifier.None;
+        public InstanceType instanceType = InstanceType.None;
 
         public FieldData(object instance, FieldInfo fieldInfo, int index)
         {
@@ -27,6 +28,15 @@ namespace Zq.Tool
             else if (this.fieldInfo.IsPrivate)
             {
                 accessModifier = AccessModifier.Private;
+            }
+
+            if (this.fieldInfo.IsStatic)
+            {
+                instanceType = InstanceType.Static;
+            }
+            else
+            {
+                instanceType = InstanceType.Instance;
             }
 
             object value = GetValue();
