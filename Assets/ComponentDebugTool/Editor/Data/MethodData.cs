@@ -12,6 +12,8 @@ namespace Zq.Tool
         public string name = string.Empty;
         public AccessModifier accessModifier = AccessModifier.None;
         public InstanceType instanceType = InstanceType.None;
+        public bool isGet = false;
+        public bool isSet = false;
         public List<ParameterData> parameters = new List<ParameterData>();
 
         public MethodData(object instance, MethodInfo methodInfo)
@@ -36,6 +38,16 @@ namespace Zq.Tool
             else
             {
                 instanceType = InstanceType.Instance;
+            }
+
+            if (name.StartsWith("get_"))
+            {
+                isGet = true;
+            }
+
+            if (name.StartsWith("set_"))
+            {
+                isSet = true;
             }
 
             ParameterInfo[] parameters = methodInfo.GetParameters();

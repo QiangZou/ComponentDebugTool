@@ -31,7 +31,7 @@ namespace Zq.Tool
             editorObjectInfo = new EditorObject(fieldData.objectinfo, level, name);
         }
 
-        public static void GUI(EditorField info, AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance, string searchKeyword = "")
+        public static void GUI(EditorField info, string searchKeyword = "", AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance)
         {
             //info.fieldData.RefreshValue();//重要 字段初始化有可能未空 没有引用
             if (accessModifier != AccessModifier.All && info.fieldData.accessModifier != accessModifier)

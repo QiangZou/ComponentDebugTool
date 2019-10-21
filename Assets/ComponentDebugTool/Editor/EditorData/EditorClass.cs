@@ -63,7 +63,7 @@ namespace Zq.Tool
             }
         }
 
-        public static void GUI(EditorClass info, MemberFilter memberFilter = MemberFilter.All, AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance, string searchKeyword = "")
+        public static void GUI(EditorClass info, string searchKeyword = "", MemberFilter memberFilter = MemberFilter.All, AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance, bool isGet = false, bool isSet = false)
         {
             EditorGUI.indentLevel = info.level;
 
@@ -80,7 +80,7 @@ namespace Zq.Tool
                     {
                         EditorField editorField = info.editorFields[i];
 
-                        EditorField.GUI(editorField, accessModifier, instanceType, searchKeyword);
+                        EditorField.GUI(editorField, searchKeyword, accessModifier, instanceType);
                     }
                 }
 
@@ -90,7 +90,7 @@ namespace Zq.Tool
                     {
                         EditorMethod editorMethod = info.editorMethods[i];
 
-                        EditorMethod.GUI(editorMethod, accessModifier, instanceType, searchKeyword);
+                        EditorMethod.GUI(editorMethod, searchKeyword, accessModifier, instanceType, isGet, isSet);
                     }
                 }
             }

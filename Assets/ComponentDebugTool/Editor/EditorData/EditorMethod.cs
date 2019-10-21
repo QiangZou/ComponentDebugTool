@@ -31,7 +31,7 @@ namespace Zq.Tool
             }
         }
 
-        public static void GUI(EditorMethod editorMethod, AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance, string searchKeyword = "")
+        public static void GUI(EditorMethod editorMethod, string searchKeyword = "", AccessModifier accessModifier = AccessModifier.All, InstanceType instanceType = InstanceType.Instance, bool isGet = false, bool isSet = false)
         {
             if (accessModifier != AccessModifier.All && editorMethod.methodData.accessModifier != accessModifier)
             {
@@ -44,6 +44,16 @@ namespace Zq.Tool
             }
 
             if (searchKeyword != string.Empty && editorMethod.methodData.name.ToLower().Contains(searchKeyword) == false)
+            {
+                return;
+            }
+
+            if (isGet == false && editorMethod.methodData.isGet == true)
+            {
+                return;
+            }
+
+            if (isSet == false && editorMethod.methodData.isSet == true)
             {
                 return;
             }
