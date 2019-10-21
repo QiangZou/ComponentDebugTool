@@ -71,6 +71,9 @@ public class Demo : MonoBehaviour
 - 新增实例或静态过滤
 - 新增窗口模式
 
+## 2019年10月21日
+- 新增是否显示属性Get Set
+
 # 后续优化点
 
 - 解析字典
